@@ -16,8 +16,9 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   color: #2c3e50;
   background-color: #fafafa;
   padding: 24px;
@@ -28,9 +29,5 @@ html,
 body,
 #app {
   height: 100%;
-}
-
-* {
-  box-sizing: border-box;
 }
 </style>
