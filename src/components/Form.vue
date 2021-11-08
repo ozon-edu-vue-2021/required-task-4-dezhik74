@@ -24,16 +24,13 @@
       <!-- Форма для старого имени -->
       <old-name-form v-if="familyChanged === 'true'" />
 
-      <pre>
-        {{ personalData }}
-        {{ passportData }}
-
-        {{ familyChanged }}
-
-        {{ prevousNameData }}
-
-      </pre>
-      <div @click.prevent="sendData" class="button">Отправить</div>
+      <div
+        v-if="!hasErrors"
+        @click.prevent="sendData"
+        class="button button-send"
+      >
+        Отправить
+      </div>
     </div>
   </div>
 </template>
@@ -42,7 +39,7 @@
 import countryData from "../assets/data/citizenships.json";
 import passportTypes from "../assets/data/passport-types.json";
 import { isElementInArray } from "../utils/utils";
-import DoubleRadioBox from "./DoubleRadioBox.vue";
+import DoubleRadioBox from "./inputs/DoubleRadioBox.vue";
 import PersonalDataForm from "./PersonalDataForm.vue";
 import PassportDataForm from "./PassportDataForm.vue";
 import OldNameForm from "./OldNameForm.vue";
@@ -82,6 +79,7 @@ export default {
         prevousLastName: "",
         prevousFirstName: "",
       },
+      errorSet: [],
     };
   },
   provide: function () {
@@ -118,6 +116,11 @@ export default {
       console.log(JSON.stringify(APIData, null, 2));
     },
   },
+  computed: {
+    hasErrors: function () {
+      return this.errorSet.length > 0;
+    },
+  },
   created() {
     countryData.map((country) => {
       if (!isElementInArray(country.nationality, this.citizenshipVariants)) {
@@ -127,6 +130,23 @@ export default {
     passportTypes.map((passType) => {
       this.passportTypes.push(passType.type);
     });
+    this.$root.$on(
+      "add-error",
+      function (id) {
+        if (!this.errorSet.includes(id)) {
+          this.errorSet.push(id);
+        }
+      }.bind(this)
+    );
+    this.$root.$on(
+      "delete-error",
+      function (id) {
+        let idx = this.errorSet.indexOf(id);
+        if (idx !== -1) {
+          this.errorSet.splice(idx, 1);
+        }
+      }.bind(this)
+    );
   },
 };
 </script>
@@ -138,5 +158,9 @@ export default {
 
 .prevous-row {
   margin-top: 10px;
+}
+
+.button-send {
+  margin-top: 30px;
 }
 </style>

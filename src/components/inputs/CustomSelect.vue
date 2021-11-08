@@ -22,7 +22,7 @@
 
 <script>
 import ClickOutside from "vue-click-outside";
-import { debounce } from "../utils/debounce";
+import { debounce } from "../../utils/debounce";
 
 export default {
   name: "CustomSelect",
@@ -57,7 +57,6 @@ export default {
       this.isDropdownOpen = false;
     },
     makeFilteredList() {
-      console.log("makeFilteredList");
       let res = this.itemList.filter((item) =>
         item.toLowerCase().startsWith(this.value.toLowerCase())
       );
@@ -76,10 +75,7 @@ export default {
   created() {
     this.debouncedMakeFilteredList = debounce(this.makeFilteredList, 1000);
     this.makeFilteredList();
-  },
-  model: {
-    prop: "modelValue",
-    event: "input",
+    this.value = this.$attrs.value;
   },
 };
 </script>

@@ -1,22 +1,21 @@
 <template>
   <div>
     <div class="row">
-      <div class="column">
-        <label for="latin-lastname">Фамилия на латинице</label>
-        <input
-          id="latin-lastname"
-          placeholder="Фамилия на латинице"
-          v-model="passportData.latinLastName"
-        />
-      </div>
-      <div class="column">
-        <label for="latin-firstname">Имя на латинице </label>
-        <input
-          id="latin-firstname"
-          placeholder="Имя на латинице"
-          v-model="passportData.latinFirstName"
-        />
-      </div>
+      <custom-input
+        id="latin-lastname"
+        placeholder="Фамилия на латинице"
+        title="Фамилия на латинице"
+        v-model="passportData.latinLastName"
+        validationType="LatinValidate"
+      />
+
+      <custom-input
+        id="latin-firstname"
+        placeholder="Имя на латинице"
+        title="Имя на латинице"
+        v-model="passportData.latinFirstName"
+        validationType="LatinValidate"
+      />
     </div>
     <div class="row small-text">
       Иностранцы заполняют латинскими буквами. Например, Ivanov Ivan
@@ -31,19 +30,11 @@
         />
       </div>
       <div class="column">
-        <label for="foreign-pass-country">Страна выдачи </label>
-        <select
-          id="foreign-pass-country"
+        <custom-select
+          title="Страна выдачи"
+          :itemList="citizenshipVariants"
           v-model="passportData.foreignPassCountry"
-        >
-          <option
-            v-for="country in citizenshipVariants"
-            v-bind:value="country"
-            :key="country"
-          >
-            {{ country }}
-          </option>
-        </select>
+        ></custom-select>
       </div>
       <div class="column">
         <label for="foreign-pass-type">Тип паспорта </label>
@@ -62,9 +53,16 @@
 </template>
 
 <script>
+import CustomSelect from "./inputs/CustomSelect.vue";
+import CustomInput from "./inputs/CustomInput.vue";
+
 export default {
   name: "PassportForeignForm",
   inject: ["passportData"],
+  components: {
+    CustomSelect,
+    CustomInput,
+  },
   props: {
     citizenshipVariants: {
       type: Array,
@@ -81,7 +79,7 @@ export default {
 <style scoped>
 .small-text {
   font-size: 14px;
-  margin-top: -15px;
+  margin-top: 0px;
   margin-left: 0;
 }
 </style>

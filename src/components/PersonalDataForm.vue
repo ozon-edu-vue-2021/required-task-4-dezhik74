@@ -1,44 +1,43 @@
 <template>
   <div>
     <div class="row">
-      <div class="column">
-        <label for="last-name">Фамилия </label>
-        <input
-          id="last-name"
-          placeholder="Фамилия"
-          v-model="personalData.lastName"
-        />
-      </div>
-      <div class="column">
-        <label for="first-name">Имя </label>
-        <input
-          id="first-name"
-          placeholder="Имя"
-          v-model="personalData.firstName"
-        />
-      </div>
-      <div class="column">
-        <label for="middle-name">Отчество </label>
-        <input
-          id="middle-name"
-          placeholder="Отчество"
-          v-model="personalData.middleName"
-        />
-      </div>
+      <custom-input
+        id="last-name"
+        placeholder="Фамилия"
+        title="Фамилия"
+        v-model="personalData.lastName"
+      />
+
+      <custom-input
+        id="first-name"
+        placeholder="Имя"
+        title="Имя"
+        v-model="personalData.firstName"
+      />
+
+      <custom-input
+        id="middle-name"
+        placeholder="Отчество"
+        title="Отчество"
+        v-model="personalData.middleName"
+      />
     </div>
     <div class="row">
-      <div class="column column-50">
-        <label for="birth-date">Дата рождения </label>
-        <input
-          id="birth-date"
-          placeholder="Дата рождения"
-          v-model="personalData.birthDate"
-        />
-      </div>
-      <div class="column column-50">
-        <label for="email">E-mail </label>
-        <input id="email" placeholder="E-mail" v-model="personalData.eMail" />
-      </div>
+      <custom-input
+        id="birth-date"
+        placeholder="Дата рождения"
+        title="Дата рождения"
+        v-model="personalData.birthDate"
+        validationType="DateValidate"
+      />
+
+      <custom-input
+        id="email"
+        placeholder="Email"
+        title="Email"
+        v-model="personalData.eMail"
+        validationType="EMAILValidate"
+      />
     </div>
 
     <double-radio-box
@@ -52,12 +51,14 @@
 </template>
 
 <script>
-import DoubleRadioBox from "./DoubleRadioBox.vue";
+import DoubleRadioBox from "./inputs/DoubleRadioBox.vue";
+import CustomInput from "./inputs/CustomInput.vue";
 
 export default {
   name: "PersonalData",
   components: {
     DoubleRadioBox,
+    CustomInput,
   },
   inject: ["personalData"],
 };

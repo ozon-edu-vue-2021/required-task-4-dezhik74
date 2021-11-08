@@ -7,43 +7,27 @@
           :itemList="citizenshipVariants"
           v-model="passportData.sitizenship"
         ></custom-select>
-
-        <!-- <label for="citizenship">Гражданство </label>
-        <input
-          list="country"
-          id="citizenship"
-          v-model="passportData.sitizenship"
-        />
-        <datalist id="country">
-          <option
-            v-for="country in citizenshipVariants"
-            v-bind:value="country"
-            :key="country"
-          >
-            {{ country }}
-          </option>
-        </datalist> -->
       </div>
     </div>
     <!-- Русский паспорт -->
     <div v-if="passportData.sitizenship === 'Russia'">
       <div class="row">
-        <div class="column">
-          <label for="pass-seria">Серия паспорта </label>
-          <input
-            id="pass-seria"
-            placeholder="Серия паспорта"
-            v-model="passportData.passSeria"
-          />
-        </div>
-        <div class="column">
-          <label for="pass-number">Номер паспорта </label>
-          <input
-            id="pass-number"
-            placeholder="Номер паспорта"
-            v-model="passportData.passNumber"
-          />
-        </div>
+        <custom-input
+          id="pass-seria"
+          placeholder="Серия паспорта"
+          title="Серия паспорта"
+          v-model="passportData.passSeria"
+          validationType="FourNumValidate"
+        />
+
+        <custom-input
+          id="pass-number"
+          placeholder="Номер паспорта"
+          title="Номер паспорта"
+          v-model="passportData.passNumber"
+          validationType="SixNumValidate"
+        />
+
         <div class="column">
           <label for="pass-date">Дата выдачи </label>
           <input
@@ -65,12 +49,14 @@
 
 <script>
 import PassportForeignForm from "./PassportForeignForm.vue";
-import CustomSelect from "./CustomSelect.vue";
+import CustomSelect from "./inputs/CustomSelect.vue";
+import CustomInput from "./inputs/CustomInput.vue";
 
 export default {
   components: {
     PassportForeignForm,
     CustomSelect,
+    CustomInput,
   },
   name: "PassportDataForm",
   inject: ["passportData"],
