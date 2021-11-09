@@ -40,7 +40,7 @@
     </div>
     <!-- Загранпаспорт -->
     <passport-foreign-form
-      v-else
+      v-if="passportData.sitizenship !== 'Russia'"
       :citizenshipVariants="citizenshipVariants"
       :passportTypes="passportTypes"
     />

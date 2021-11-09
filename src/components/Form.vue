@@ -13,13 +13,14 @@
         :passportTypes="passportTypes"
       />
 
-      <double-radio-box
-        title="Меняли ли фамилию или имя?"
-        name="change-family-group"
-        :first-options="{ text: 'Нет', id: 'l-n-not-changed', value: 'false' }"
-        :second-options="{ text: 'Да', id: 'l-n-changed', value: 'true' }"
-        v-model="familyChanged"
-      />
+      <double-radio title="Меняли ли фамилию или имя?">
+        <custom-radio-button
+          v-model="familyChanged"
+          label="Нет"
+          value="false"
+        />
+        <custom-radio-button v-model="familyChanged" label="Да" value="true" />
+      </double-radio>
 
       <!-- Форма для старого имени -->
       <old-name-form v-if="familyChanged === 'true'" />
@@ -39,17 +40,19 @@
 import countryData from "../assets/data/citizenships.json";
 import passportTypes from "../assets/data/passport-types.json";
 import { isElementInArray } from "../utils/utils";
-import DoubleRadioBox from "./inputs/DoubleRadioBox.vue";
 import PersonalDataForm from "./PersonalDataForm.vue";
 import PassportDataForm from "./PassportDataForm.vue";
 import OldNameForm from "./OldNameForm.vue";
+import DoubleRadio from "./inputs/DoubleRadio.vue";
+import CustomRadioButton from "./inputs/CustomRadioButton.vue";
 
 export default {
   components: {
-    DoubleRadioBox,
     PersonalDataForm,
     PassportDataForm,
     OldNameForm,
+    DoubleRadio,
+    CustomRadioButton,
   },
   data() {
     return {

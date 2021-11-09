@@ -40,25 +40,32 @@
       />
     </div>
 
-    <double-radio-box
-      title="Пол"
-      name="gender-group"
-      :first-options="{ text: 'Мужской', id: 'man', value: 'Man' }"
-      :second-options="{ text: 'Женский', id: 'woman', value: 'Woman' }"
-      v-model="personalData.gender"
-    />
+    <double-radio title="Пол">
+      <custom-radio-button
+        v-model="personalData.gender"
+        label="Мужской"
+        value="Man"
+      />
+      <custom-radio-button
+        v-model="personalData.gender"
+        label="Женский"
+        value="Woman"
+      />
+    </double-radio>
   </div>
 </template>
 
 <script>
-import DoubleRadioBox from "./inputs/DoubleRadioBox.vue";
 import CustomInput from "./inputs/CustomInput.vue";
+import CustomRadioButton from "./inputs/CustomRadioButton.vue";
+import DoubleRadio from "./inputs/DoubleRadio.vue";
 
 export default {
   name: "PersonalData",
   components: {
-    DoubleRadioBox,
     CustomInput,
+    CustomRadioButton,
+    DoubleRadio,
   },
   inject: ["personalData"],
 };

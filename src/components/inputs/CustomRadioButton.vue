@@ -1,0 +1,48 @@
+<template>
+  <label class="label-class">
+    <input
+      type="radio"
+      :checked="shouldBeChecked"
+      :value="value"
+      @change="updateInput"
+    />
+    {{ label }}
+  </label>
+</template>
+
+<script>
+export default {
+  model: {
+    prop: "modelValue",
+    event: "change",
+  },
+  props: {
+    value: {
+      type: String,
+    },
+    modelValue: {
+      default: "",
+    },
+    label: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    shouldBeChecked() {
+      return this.modelValue == this.value;
+    },
+  },
+  methods: {
+    updateInput() {
+      this.$emit("change", this.value);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.label-class {
+  margin-right: 20px;
+}
+</style>
