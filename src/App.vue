@@ -1,23 +1,23 @@
 <template>
   <div id="app">
-    <Form />
+    <div id="nav">
+      <router-link to="/new">Новая форма (работает хорошо)</router-link>|
+      <router-link to="/old">Старая форма (работает плохо)</router-link>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Form from "./components/Form.vue";
-
 export default {
   name: "App",
-  components: {
-    Form,
-  },
 };
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   color: #2c3e50;
   background-color: #fafafa;
   padding: 24px;
@@ -28,9 +28,5 @@ html,
 body,
 #app {
   height: 100%;
-}
-
-* {
-  box-sizing: border-box;
 }
 </style>
